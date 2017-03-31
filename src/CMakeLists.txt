@@ -1,0 +1,15 @@
+include_directories(${display_INCLUDE_DIRS})
+
+set(display_SRC
+    "main.cpp"
+)
+
+set(display_INC
+
+)
+
+add_executable(${DISPLAY} ${display_SRC} ${display_INC})
+
+find_package(SFML 2 REQUIRED system window graphics)
+include_directories(${SFML_INCLUDE_DIR})
+target_link_libraries(${DISPLAY} ${SFML_LIBRARIES})
