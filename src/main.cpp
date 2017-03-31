@@ -1,8 +1,10 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/OpenGL.hpp>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::Window window(sf::VideoMode(600, 400), "opengl", sf::Style::Default);
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
@@ -15,8 +17,9 @@ int main()
                 window.close();
         }
 
-        window.clear();
-        window.draw(shape);
+        //window.clear();
+        
+        //window.draw(shape);
         window.display();
     }
 
