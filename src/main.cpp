@@ -2,16 +2,21 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 // #include <SFML/OpenGL.hpp>
+// void newExplosion(const int& x, const int& y)
+// {
+//     
+// }
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(600, 400), "opengl", sf::Style::Default);
 
+    std::vector<sf::VertexArray> explosions;
 
-    sf::VertexArray VA(sf::LinesStrip, 100);
+    sf::VertexArray VA(sf::LinesStrip);
     VA.setPrimitiveType(sf::LinesStrip);
 
-    for(auto i = 0; i<100; i++)
+    for(auto i = 90; i<100; i++)
     {
         VA.append(sf::Vertex(sf::Vector2f(i,i)));
     }
@@ -40,22 +45,31 @@ int main()
             {
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
-                    auto x = sf::Mouse::getPosition(window).x;
-                    auto y = sf::Mouse::getPosition(window).y;
+                    const auto x = sf::Mouse::getPosition(window).x;
+                    const auto y = sf::Mouse::getPosition(window).y;
                     std::cout << x << " " << y << std::endl;
 
-
+                    // newExplosion(x,y);
+                    explosions.push_back(sf::VertexArray(sf::LinesStrip));
+                    auto* tmp = &explosions.back();
+                    for(auto i=0; i<11; i+=10)
+                    {
+                        tmp->append(sf::Vertex(sf::Vector2f(x+i,y+i)));
+                    }
                 }
             }
         }
         window.clear();
         
         window.draw(VA);
-        
+        for(const auto& it : explosions)
+        {
+            std::cout << it.getVertexCount() << std::endl;
+            window.draw(it);
+        }
         window.display();
     }
 
-    // release opengl resources
 
     return 0;
 }
