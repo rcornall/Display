@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
 
 project(display)
 
+add_compile_options(-std=c++11)
 # for vim c++ completion
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 
