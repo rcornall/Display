@@ -1,7 +1,8 @@
-set(INC_DIR ../inc/display)
+set(INC_DIR ${display_SOURCE_DIR}/inc/display)
 include_directories(${INC_DIR})
 set(display_SRC
     main.cpp
+    Explosion.cpp
 )
 
 set(display_INC

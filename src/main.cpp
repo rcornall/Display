@@ -27,7 +27,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(600, 400), "opengl", sf::Style::Default);
     window.setVerticalSyncEnabled(false);
 
-    std::vector<sf::VertexArray> explosions;
+    std::vector<Explosion> explosions;
 
     sf::VertexArray VA(sf::LinesStrip);
     VA.setPrimitiveType(sf::LinesStrip);
@@ -42,7 +42,7 @@ int main()
 
     sf::Vertex vertex2(sf::Vector2f(15, 55), sf::Vector2f(100, 100));
 
-    sf::Clock clock;
+    sf::Clock clock, dtClock;
     sf::Text fpsText;
     unsigned fps = 0;
     sf::Font font;
@@ -56,6 +56,7 @@ int main()
 
     //VA.append(vertex1);
     //VA.append(vertex2);
+    float dt = 0.1f;
     while (window.isOpen())
     {
         sf::Event event;
@@ -67,7 +68,6 @@ int main()
                     window.close();
                     break;
                 case sf::Event::MouseButtonPressed:
-                    {
                     if (event.mouseButton.button == sf::Mouse::Left)
                     {
                         const auto x = sf::Mouse::getPosition(window).x;
@@ -75,27 +75,21 @@ int main()
                         std::cout << x << " " << y << std::endl;
 
                         // newExplosion(x,y);
-                        explosions.push_back(sf::VertexArray(sf::LinesStrip));
-                        explosions.back().append(sf::Vertex(sf::Vector2f(x,y)));
-                        explosions.back().append(sf::Vertex(sf::Vector2f(x+1,y+1)));
-                        // auto* tmp = &explosions.back();
-                        // for(auto i=0; i<11; i+=10)
-                        // {
-                        //     tmp->append(sf::Vertex(sf::Vector2f(x-i,y-i)));
-                        // } }    
-                    }}
+                        explosions.push_back(Explosion(sf::Vector2f(x,y)));
+                        // explosions.push_back(sf::VertexArray(sf::LinesStrip));
+                        // explosions.back().append(sf::Vertex(sf::Vector2f(x,y)));
+                        // explosions.back().append(sf::Vertex(sf::Vector2f(x+1,y+1)));
+                    }
                     break;
                 default:
                     break;
             }
         }
-        window.clear();
-        
-        window.draw(VA);
-        for(const auto& it : explosions)
+
+        // update positions
+        for(auto& it : explosions)
         {
-            // std::cout << it.getVertexCount() << std::endl;
-            window.draw(it);
+            it.updatePosition(dt);
         }
         fps = updateFps(clock);
         if(fps)
@@ -103,8 +97,21 @@ int main()
             // std::cout << std::to_string(fps) << std::endl;
             fpsText.setString("fps: " + std::to_string(fps));
         }
+
+        // clear and start drawing
+        window.clear();
+        
+        window.draw(VA);
+        for(auto& it : explosions)
+        {
+            // std::cout << it.getVertexCount() << std::endl;
+            it.draw(window);
+        }
+        
         window.draw(fpsText);
         window.display();
+
+        dt = dtClock.restart().asSeconds();
     }
     
     return 0;
