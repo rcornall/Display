@@ -1,11 +1,11 @@
-include_directories(${display_INCLUDE_DIRS})
-
+set(INC_DIR ../inc/display)
+include_directories(${INC_DIR})
 set(display_SRC
-    "main.cpp"
+    main.cpp
 )
 
 set(display_INC
-
+    ${INC_DIR}/Explosion.hpp
 )
 
 add_executable(${DISPLAY} ${display_SRC} ${display_INC})
