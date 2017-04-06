@@ -4,24 +4,24 @@
 Explosion::Explosion() :
     mVertexArray(sf::LinesStrip, LINES_AMOUNT),
     isRecyclable(false),
-    mForce(helper::randF(-20.f,20.f), helper::randF(-5.f,30.f))
+    mForce(0, helper::randF(15.f,50.f))
 {
     for(auto& it : mPositions)
         it = sf::Vector2f(50.f,40.f);
     for(auto& it : mSpeed)
-        it = sf::Vector2f(helper::randF(-20.f,20.f),helper::randF(0.f,30.f));
+        it = sf::Vector2f(helper::randF(-40.f,40.f),helper::randF(10.f,-70.f));
 }
 
 Explosion::Explosion(sf::Vector2f position) :
     mVertexArray(sf::LinesStrip, LINES_AMOUNT),
     isRecyclable(false),
-    mForce(helper::randF(-20.f,20.f), helper::randF(-5.f,30.f))
+    mForce(0, helper::randF(15.f,50.f))
 {
     // set positions of all 45 lines to start at the same point
     for(auto& it : mPositions)
         it = position;
     for(auto& it : mSpeed)
-        it = sf::Vector2f(helper::randF(-20.f,20.f),helper::randF(0.f,30.f));
+        it = sf::Vector2f(helper::randF(-40.f,40.f),helper::randF(10.f,-70.f));
 
 
 }

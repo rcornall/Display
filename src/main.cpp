@@ -24,7 +24,7 @@ unsigned updateFps(sf::Clock& clock)
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(600, 400), "opengl", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(600, 800), "opengl", sf::Style::Default);
     window.setVerticalSyncEnabled(false);
 
     std::vector<Explosion> explosions;
