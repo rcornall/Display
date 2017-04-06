@@ -6,12 +6,12 @@ set(display_SRC
 )
 
 set(display_INC
-    ${INC_DIR}/Explosion.hpp
+    ${INC_DIR}/helper.hpp
 )
 
 add_executable(${DISPLAY} ${display_SRC} ${display_INC})
 
-find_package(SFML 2 REQUIRED system window graphics)
+find_package(SFML 2.4 REQUIRED system window graphics)
 include_directories(${SFML_INCLUDE_DIR})
 target_link_libraries(${DISPLAY} ${SFML_LIBRARIES})
 

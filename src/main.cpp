@@ -49,8 +49,8 @@ int main()
     font.loadFromFile("/home/rob/Downloads/muzkaw/consola.ttf");
     fpsText.setPosition(sf::Vector2f(10,10));
     fpsText.setFont(font);
-    fpsText.setColor(sf::Color::White);
-    fpsText.setCharacterSize(9);
+    fpsText.setFillColor(sf::Color::White);
+    fpsText.setCharacterSize(10);
     fpsText.setString("fps: 0");
 
 
