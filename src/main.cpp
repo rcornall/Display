@@ -86,6 +86,7 @@ int main()
                 explosions.end()
         );
         explosionCount.setString("explosions: " + std::to_string(explosions.size()));
+        
         // update fps
         fps = updateFps(clock);
         if(fps)

@@ -36,7 +36,7 @@ Explosion::Explosion(sf::Vector2f position) :
 void Explosion::updatePosition(const float& dt)
 {
     mTimeAlive += dt;
-    if(mTimeAlive > 1.0f) /* start dying after 1 sec */
+    if(mTimeAlive > 1.0f) /* start dying after a bit */
         mDying = true;
 
     mPreviousPositions = mPositions;
@@ -52,13 +52,13 @@ void Explosion::updatePosition(const float& dt)
         if(!mDying)
             mTracers[i].push_back(sf::Vector3f(mPositions[i].x, mPositions[i].y, MAX_ALPHA));
         else /* start fading out */
-            mTracers[i].push_back(sf::Vector3f(mPositions[i].x, mPositions[i].y, MAX_ALPHA - mTimeAlive*50));
+            mTracers[i].push_back(sf::Vector3f(mPositions[i].x, mPositions[i].y, std::max(MAX_ALPHA - mTimeAlive*50.f,0.f)));
 
         for(auto& tracer : mTracers[i])
         {
             tracer.z = std::max(tracer.z-MAX_ALPHA*dt,0.f);
             if(mDying)
-                tracer.z = std::max(tracer.z-200*dt,0.f);
+                tracer.z = std::max(tracer.z-140*dt,0.f);
         }
         // remove elements of tracer with 0 alpha value
         mTracers[i].erase(
