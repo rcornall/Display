@@ -1,1 +1,9 @@
-.
+compile on linux:
+$ g++ -std=c++11 src/*cpp  -Iinc/display -o test -lsfml-graphics -lsfml-window -lsfml-system
+
+or with cmake, go into build/ and do:
+$ cmake ..
+$ make
+and run with ./display
+
+you need latest SFML 2.4.2 libraries, and if using cmake, copy the FindSFML.cmake into /user/share/cmake/Modules/.
